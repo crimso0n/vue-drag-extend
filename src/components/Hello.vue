@@ -1,10 +1,11 @@
 <template>
-  <div class="hello wrap">
+  <div id="view" class="hello wrap">
     <div class="edit">
       <Edit></Edit>
     </div>
     <div class="view">
       <div class="view-inner">
+        <Bmap></Bmap>
         <Box1 v-drag:drag="isdrag" v-show="showBox1" class="box1"></Box1>
         <Box2 v-drag:drag="isdrag" v-show="showBox2" class="box2"></Box2>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -15,12 +16,13 @@
 
 <script>
 import Edit from './edit'
+import Bmap from './box/map'
 import Box1 from './box/box1'
 import Box2 from './box/box2'
 export default {
   name: 'hello',
   components: {
-    Edit,Box1,Box2
+    Edit,Box1,Box2,Bmap
   },
   data () {
     return {
@@ -45,6 +47,7 @@ export default {
   },
   watch:{
     viewHeight(){
+      console.log(this.$store);
       $('.view-inner').css({
         height: this.viewHeight
       })
@@ -68,6 +71,7 @@ export default {
       width: 300px;
       height: 100%;
       // border: 1px solid red;
+      overflow: hidden;
     }
     .view{
       position: relative;
@@ -76,6 +80,7 @@ export default {
       height: 100%;
       background-color: #4a4a4a;
       overflow: auto;
+      padding: 20px;
       .view-inner{
         position: absolute;
         left: 0;
@@ -99,6 +104,20 @@ export default {
         width: 50px;
         height: 50px;
         background-color: #aaa;
+      }
+    }
+  }
+  .hello.full {
+    .edit{
+      display: none;
+    }
+    .view{
+      // background-color: #fff;
+      width: 100%;
+      height: 100%;
+      .view-inner{
+        margin: 0;
+        box-shadow: none;
       }
     }
   }

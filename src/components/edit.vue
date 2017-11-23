@@ -11,6 +11,7 @@
     <button @click="toggleBox1">组件1</button>
     <button @click="toggleBox2">组件2</button>
     <button>保存</button>
+    <button @click="fullScreen">预览</button>
   </div>
 </template>
 
@@ -48,6 +49,9 @@ export default {
     }
   },
   methods:{
+    fullScreen(){
+      $('#view').addClass('full');
+    },
     toggleBox1(){
       this.showBox1 = !this.showBox1
       this.$store.commit({

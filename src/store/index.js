@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import box1 from './modules/box1'
 Vue.use(Vuex)
 
 var state = {
@@ -25,7 +26,9 @@ var state = {
 	},
 }
 const getters ={
-
+	box1(state){
+		return state.a
+	}
 }
 const mutations={
 	changeInfo(state,payload){
@@ -60,5 +63,9 @@ const mutations={
 }
 export default new Vuex.Store({
 	state,
-	mutations
+	getters,
+	mutations,
+	modules:{
+		a:box1,
+	}
 })
