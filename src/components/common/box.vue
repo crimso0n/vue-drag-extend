@@ -2,9 +2,7 @@
   <div class="Box-wrap wrap">
     <div class="drag"></div>
     <div class="box-content-wrap">
-      <slot name="content"></slot>
-    </div>
-    <div class="border">
+      <slot name="content" class="box-content"></slot>
     </div>
   </div>
 </template>
@@ -34,6 +32,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   .Box-wrap{
+    width: 100%;
+    height: 100%;
+    border: 2px dashed rgba(0,0,0,0);
     .drag{
       display: none;
       position: absolute;
@@ -47,18 +48,14 @@ export default {
       cursor: nwse-resize;
       z-index: 100;
     }
-    .border{
-      display: none;
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      border: 2px dashed #778ba3;
-    }
     .box-content-wrap{
       width: 100%;
       height: 100%;
       overflow: hidden;
+      .box-content{
+        width: 100%;
+        height: 100%;
+      }
     }
   }
   .Box-wrap:hover{
@@ -68,6 +65,7 @@ export default {
     .border{
       display: block;
     }
-    cursor:all-scroll;
+    border: 2px dashed #778ba3;
+    box-sizing: border-box;
   }
 </style>

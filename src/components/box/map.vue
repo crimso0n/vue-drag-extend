@@ -1,175 +1,111 @@
 <template>
   <div class="map">
-    <div class="chart wrap" ref="chart"></div>
+    <div class="chart" ref="chart"></div>
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
+// import echarts from 'echarts'
 export default {
   name: 'box2',
   data () {
     return {
       chart: '',
+      map: '',
     }
   },
   computed:{
+    mapCenter(){
+      return (this.$store.state.map.center.lng + ',' + this.$store.state.map.center.lat)
+    },
+    lng(){
+      return this.$store.state.map.center.lng
+    },
+    lat(){
+      return this.$store.state.map.center.lat
+    },
     option(){
       var option = {
-    		bmap: {
-    			center: [117.223523, 32.028226],
-    			zoom: 8,
-    			roam: true,
-    			mapStyle: {
-    				styleJson: [{
-    					'featureType': 'water',
-    					'elementType': 'all',
-    					'stylers': {
-    						'color': '#d1d1d1'
-    					}
-    				}, {
-    					'featureType': 'land',
-    					'elementType': 'all',
-    					'stylers': {
-    						'color': '#f3f3f3'
-    					}
-    				}, {
-    					'featureType': 'railway',
-    					'elementType': 'all',
-    					'stylers': {
-    						'visibility': 'off'
-    					}
-    				}, {
-    					'featureType': 'highway',
-    					'elementType': 'all',
-    					'stylers': {
-    						'color': '#fdfdfd'
-    					}
-    				}, {
-    					'featureType': 'highway',
-    					'elementType': 'labels',
-    					'stylers': {
-    						'visibility': 'off'
-    					}
-    				}, {
-    					'featureType': 'arterial',
-    					'elementType': 'geometry',
-    					'stylers': {
-    						'color': '#fefefe'
-    					}
-    				}, {
-    					'featureType': 'arterial',
-    					'elementType': 'geometry.fill',
-    					'stylers': {
-    						'color': '#fefefe'
-    					}
-    				}, {
-    					'featureType': 'poi',
-    					'elementType': 'all',
-    					'stylers': {
-    						'visibility': 'off'
-    					}
-    				}, {
-    					'featureType': 'green',
-    					'elementType': 'all',
-    					'stylers': {
-    						'visibility': 'off'
-    					}
-    				}, {
-    					'featureType': 'subway',
-    					'elementType': 'all',
-    					'stylers': {
-    						'visibility': 'off'
-    					}
-    				}, {
-    					'featureType': 'manmade',
-    					'elementType': 'all',
-    					'stylers': {
-    						'color': '#d1d1d1'
-    					}
-    				}, {
-    					'featureType': 'local',
-    					'elementType': 'all',
-    					'stylers': {
-    						'color': '#d1d1d1'
-    					}
-    				}, {
-    					'featureType': 'arterial',
-    					'elementType': 'labels',
-    					'stylers': {
-    						'visibility': 'off'
-    					}
-    				}, {
-    					'featureType': 'boundary',
-    					'elementType': 'all',
-    					'stylers': {
-    						'color': '#fefefe'
-    					}
-    				}, {
-    					'featureType': 'building',
-    					'elementType':   'all',
-    					'stylers': {
-    						'color': '#d1d1d1'
-    					}
-    				}, {
-    					'featureType': 'label',
-    					'elementType': 'labels.text.fill',
-    					'stylers': {
-    						'color': '#999999'
-    					}
-    				}]
-    			}
-    		},
-        // tooltip: {
-        //   trigger: 'item',
-        //   formatter: function (params) {
-        //     return params.name + ' : ' + params.value[2] + '%';
-        //   }
-        // },
-        // visualMap: {
-        //   min: 0,
-        //   max: 100,
-        //   top: 10,
-        //   left: 10,
-        //   calculable: true,
-        //   inRange: {
-        //     color: ['#d94e5d', '#eac736', '#50a3ba']
-        //   },
-        //   textStyle: {
-        //     color: '#111'
-        //   }
-        // },
-    		// series: [{
-    		// 	type: 'scatter',
-    		// 	coordinateSystem: 'bmap',
-    		// 	data: this.dfData,
-        //   label: {
-        //         normal: {
-        //             formatter: '{b}',
-        //             position: 'right',
-        //             show: false
-        //         },
-        //         emphasis: {
-        //             show: true
-        //         }
-        //     },
-    		// },
-        // {
-        //     name: 'select',
-        //     type: 'effectScatter',
-        //     coordinateSystem: 'bmap',
-        //     data:this.currentArea,
-        //     symbolSize: 20,
-        //     showEffectOn: 'render',
-        //     rippleEffect: {
-        //         brushType: 'stroke'
-        //     },
-        //     hoverAnimation: true,
-        //     zlevel: 1
-        // }
-      // ]
-    	}
+          // 加载 bmap 组件
+          bmap: {
+              // 百度地图中心经纬度
+              center: [120.13066322374, 30.240018034923],
+              // 百度地图缩放
+              zoom: 9,
+              // 是否开启拖拽缩放，可以只设置 'scale' 或者 'move'
+              roam: true,
+              // 百度地图的自定义样式，见 http://developer.baidu.com/map/jsdevelop-11.htm
+              mapStyle: {
+                styleJson:[
+                   {
+                             "featureType": "land",
+                             "elementType": "geometry.fill",
+                             "stylers": {
+                                       "color": "#0c1e35"
+                             }
+                   },
+                   {
+                             "featureType": "highway",
+                             "elementType": "geometry.stroke",
+                             "stylers": {
+                                       "color": "#1f395a"
+                             }
+                   },
+                   {
+                             "featureType": "arterial",
+                             "elementType": "geometry.fill",
+                             "stylers": {
+                                       "color": "#1f4f5a"
+                             }
+                   },
+                   {
+                             "featureType": "boundary",
+                             "elementType": "geometry.fill",
+                             "stylers": {
+                                       "color": "#0d597a",
+                                       "weight": "2.8",
+                                       "visibility": "on"
+                             }
+                   },
+                   {
+                             "featureType": "highway",
+                             "elementType": "geometry.fill",
+                             "stylers": {
+                                       "color": "#1f395a"
+                             }
+                   },
+                   {
+                             "featureType": "water",
+                             "elementType": "geometry.fill",
+                             "stylers": {
+                                       "color": "#365174"
+                             }
+                   },
+                   {
+                             "featureType": "label",
+                             "elementType": "all",
+                             "stylers": {}
+                   },
+                   {
+                             "featureType": "railway",
+                             "elementType": "all",
+                             "stylers": {
+                                       "color": "#0d1d34"
+                             }
+                   }
+         				]
+              }
+          },
+      }
       return option;
+    },
+  },
+  watch:{
+    mapCenter(){
+      this.map.panTo(new BMap.Point(this.lng, this.lat))
+    },
+    option(){
+      this.chart.setOption(this.option,false)
     },
   },
   methods:{
@@ -192,5 +128,10 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
+    z-index: 10;
+    .chart{
+      width: 100%;
+      height: 100%;
+    }
   }
 </style>

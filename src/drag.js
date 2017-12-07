@@ -18,7 +18,7 @@ Vue.directive('drag', {
     function down(e) {
       offsetX = (e.pageX - el.offsetLeft);//鼠标到被移动元素的距离
       offsetY = (e.pageY - el.offsetTop);
-      console.log('down',offsetX);
+      // console.log('down',offsetX);
       if (isChangeSize) {
         barStyle = el.firstChild.firstChild.currentStyle
           ? el.firstChild.firstChild.currentStyle

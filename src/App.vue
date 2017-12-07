@@ -34,7 +34,7 @@ p{word-wrap:break-word}
 /* 公共类名 */
 .clearfix{*zoom:1}
 .echarts{ height:100%;width:100%;}
-.clearfix:after{display:block;visibility:hidden;clear:both;height:0;content:'.';font-size:0}
+.clearfix:after{display:block;visibility:hidden;clear:both;height:0;content:'';font-size:0}
 .hide{display: none;}
 .show{display: block;}
 .wrap{ width: 100%;height: 100%;position: relative;}

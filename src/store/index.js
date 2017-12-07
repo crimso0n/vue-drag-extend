@@ -1,71 +1,62 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import box1 from './modules/box1'
+import box2 from './modules/box2'
+import box3 from './modules/box3'
+import box4 from './modules/box4'
+import box5 from './modules/box5'
+import box6 from './modules/box6'
+import box7 from './modules/box7'
+import box8 from './modules/box8'
+import map from './modules/map'
 Vue.use(Vuex)
 
 var state = {
-	data: {
-		drag: false,
-		all: {
-			height: '',
-			width: ''
-		},
-		box1:{
-			show: false,
-			height: '',
-			width: '',
-			top: '',
-			left: '',
-			fontSize: '',
-			color: '',
-			backgroundColor: '',
-		},
-		box2:{
-			show: false
-		}
+	"all": {
+		"height": '',
+		"width": '',
+		"drag": false,
+		"isHistory": false,
 	},
 }
 const getters ={
-	box1(state){
-		return state.a
-	}
 }
 const mutations={
 	changeInfo(state,payload){
 		if(payload.data){
 			if (payload.data.all) {
 				if(payload.data.all.height){
-					state.data.all.height = payload.data.all.height
+					state.all.height = payload.data.all.height
 				}
 				if(payload.data.all.width){
-					state.data.all.width = payload.data.all.width
+					state.all.width = payload.data.all.width
 				}
 			}
 		}
 	},
-	changeBox1(state,payload){
-		if(payload.data){
-			if (payload.data && payload.data.box1) {
-				// if(payload.data.box1.show){
-				// 	console.log('store',payload.data.box1.show);
-					state.data.box1.show = payload.data.box1.show
-				// }
-			}
-		}
-	},
-	changeBox2(state,payload){
-		if(payload.data){
-			if (payload.data && payload.data.box2) {
-					state.data.box2.show = payload.data.box2.show
-			}
-		}
-	}
+}
+const actions = {
+    // AllInfo ({commit}) {
+    //   commit({
+		// 		type: 'changebox1',
+		// 		data:
+		// 	})
+    // }
 }
 export default new Vuex.Store({
 	state,
 	getters,
 	mutations,
+	actions,
 	modules:{
-		a:box1,
+		box1,
+		box2,
+		box3,
+		box4,
+		box5,
+		box6,
+		box7,
+		box8,
+		map
 	}
 })
